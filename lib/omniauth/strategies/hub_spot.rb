@@ -11,7 +11,7 @@ module OmniAuth
       # }
 
       option :client_options, {
-        :site           => 'https://api.hubspot.com',
+        :site           => 'https://api.hubapi.com',
         :authorize_url  => 'https://app.hubspot.com/oauth/authorize',
         :token_url      => 'https://api.hubapi.com/oauth/v1/token'
       }
@@ -23,27 +23,14 @@ module OmniAuth
       uid { raw_info['id'] }
       
       info do
-        pp raw_info
-
-        # "token": "CJSP5qf1KhICAQEYs-gDIIGOBii1hQIyGQAf3xBKmlwHjX7OIpuIFEavB2-qYAGQsF4",
-        #     "user": "test@hubspot.com",
-        #     "hub_domain": "demo.hubapi.com",
-        #     "scopes": [
-        #     "contacts",
-        #     "automation",
-        #     "oauth"
-        # ],
-        #     "hub_id": 62515,
-        #     "app_id": 456,
-        #     "expires_in": 21588,
-        #     "user_id": 123,
-        #     "token_type": "access"
-
         prune!({
-          'id'              => raw_info['hub_id'],
+          'uid'             => raw_info['user_id'],
+          'hub_id'          => raw_info['hub_id'],
           'app_id'          => raw_info['app_id'],
-          'user_id'         => raw_info['user_id'],
           'token_type'      => raw_info['token_type'],
+          'scopes'          => raw_info['scopes'],
+          'email'           => raw_info['user'],
+          'hub_domain'      => raw_info['hub_domain'],
         })
       end
       
@@ -52,7 +39,6 @@ module OmniAuth
       end
       
       def raw_info
-        pp access_token
         @raw_info ||= access_token.get("/oauth/v1/access-tokens/#{access_token.token}").parsed
       end
 

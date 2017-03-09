@@ -29,4 +29,4 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
-require 'omniauth/translation_exchange'
+require 'omniauth/hub_spot'
