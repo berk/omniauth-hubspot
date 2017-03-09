@@ -50,9 +50,9 @@ Here's an example *Authentication Hash* available in `request.env['omniauth.auth
 {"provider"=>"hubspot",
  "uid"=>nil,
  "info"=>
-  {"uid"=>4012082,
-   "hub_id"=>2977665,
-   "app_id"=>41039,
+  {"uid"=>33333,
+   "hub_id"=>1111,
+   "app_id"=>2222,
    "token_type"=>"access",
    "scopes"=>["content", "oauth", "files"],
    "email"=>"michael@domain.com",
